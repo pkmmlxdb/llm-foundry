@@ -129,6 +129,13 @@ class CurriculumLearning(CallbackWithConfig):
 
         # If checkpoint was saved before iteration was incremented, we need to increment it now
         duration = self._schedule[self._schedule_index]['duration']
+
+        print("#" * 50)
+        print(f'PKDB: duration unit is {duration.unit} and timeunit token is {TimeUnit.TOKEN} -- will fail if ==')
+        print(f'PKDB: token in iteration is {state.timestamp.token_in_iteration} and duration value is {duration.value} -- will fail if >=')
+        print(f'PKDB: timeunit epoch is {TimeUnit.EPOCH}; will fail if == timeunit token')
+        print(f'PKDB: epoch in iteration is {state.timestamp.epoch_in_iteration}; will fail if >=')
+
         if ((
             duration.unit == TimeUnit.TOKEN and
             state.timestamp.token_in_iteration >= duration.value
